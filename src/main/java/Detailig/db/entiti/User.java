@@ -29,6 +29,8 @@ public class User {
     @Size(min = 6, max =20)
     private String password;
 
+    private String code;
+
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -36,4 +38,6 @@ public class User {
     private Set<Role> roles;
 
     private String refreshToken;
+    private boolean enabled = false;
+
 }
