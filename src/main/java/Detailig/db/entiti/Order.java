@@ -28,7 +28,8 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
     private BigDecimal totalAmount;
 
     @CreationTimestamp

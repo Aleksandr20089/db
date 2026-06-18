@@ -1,5 +1,6 @@
 package Detailig.db.entiti;
 
+import Detailig.db.image.Image;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,4 +37,7 @@ public class Service {
             inverseJoinColumns = @JoinColumn(name = "worker_id")
     )
     private Set<Worker> workers = new HashSet<>();
+
+    @OneToMany(mappedBy = "service" , orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
 }

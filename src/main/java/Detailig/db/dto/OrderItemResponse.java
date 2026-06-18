@@ -1,6 +1,7 @@
 package Detailig.db.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public record OrderItemResponse(
         String serviceName,
@@ -8,6 +9,8 @@ public record OrderItemResponse(
         String workerName,
         String workerLastName,
         String workerSurName,
-        BigDecimal totalPrice
+        BigDecimal totalPrice,
+        List<ImageDto> serviceImages,
+        ImageDto workerAvatar
 ) {
 }

@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/workers")
@@ -25,6 +28,13 @@ public class WorkerController {
     public ResponseEntity<Void> updateExperience(@PathVariable Long id,
                                                  @RequestParam Byte newExperience) {
         workerService.updateExperienceWorker(id, newExperience);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/addImages/{id}")
+    public ResponseEntity<?> addAvatar(@PathVariable Long id ,
+                                       @RequestPart("file") MultipartFile file) throws IOException {
+        workerService.addAvatar(id, file);
         return ResponseEntity.ok().build();
     }
 }

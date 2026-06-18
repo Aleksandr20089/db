@@ -2,7 +2,6 @@ package Detailig.db.controller;
 
 import Detailig.db.dto.OrderResponse;
 import Detailig.db.entiti.OrderStatus;
-import Detailig.db.entiti.User;
 import Detailig.db.security.CustomUserDetails;
 import Detailig.db.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +26,17 @@ public class OrderController {
 
     // Получить заказ по ID
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> getOrder(@AuthenticationPrincipal CustomUserDetails user,
-                                                  @PathVariable Long orderId) {
-        // Можно добавить проверку, что заказ принадлежит пользователю
+    public ResponseEntity<OrderResponse> getOrder(@PathVariable Long orderId) {
+
         OrderResponse response = orderService.getOrderById(orderId);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("/getMyOrder")
+    public ResponseEntity<OrderResponse> getOrderUser(@AuthenticationPrincipal CustomUserDetails user) {
+
+        OrderResponse response = orderService.getOrderByUser(Long.valueOf(user.getUsername()));
         return ResponseEntity.ok(response);
     }
 

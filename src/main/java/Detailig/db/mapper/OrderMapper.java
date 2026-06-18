@@ -8,7 +8,7 @@ import Detailig.db.entiti.OrderItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ImageMapper.class)
 public interface OrderMapper {
 
     @Mapping(target = "orderDate", source = "createdAt")
@@ -18,10 +18,13 @@ public interface OrderMapper {
     @Mapping(target = "workerName", source = "worker.name")
     @Mapping(target = "workerLastName", source = "worker.lastName")
     @Mapping(target = "workerSurName", source = "worker.surName")
-    @Mapping(target = "totalPrice", source = "priceAtOrder") // = priceAtOrder
+    @Mapping(target = "totalPrice", source = "priceAtOrder")
+    @Mapping(target = "serviceImages", source = "service.images")
+    @Mapping(target = "workerAvatar", source = "worker.image")// = priceAtOrder
     OrderItemResponse toItemResponse(OrderItem item);
 
     @Mapping(target = "order", ignore = true)
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "priceAtOrder", source = "priceAtAdd")
     @Mapping(target = "status", ignore = true)
     OrderItem toOrder(CartItem cartItem);

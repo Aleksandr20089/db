@@ -25,20 +25,20 @@ Content-Type: application/json
 }
 
 ### 3. Подтверждение регистрации по коду
-POST {{baseUrl}}/api/user/confirm-registration?code=1CB25A
+POST {{baseUrl}}/api/user/confirm-registration?code=EC072B
 Content-Type: application/json
 
 ### 4. Получить корзину текущего пользователя
 GET {{baseUrl}}/api/cart
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzc0MjQ5LCJleHAiOjE3ODE3NzUxNDksInJvbGUiOlsiVVNFUiJdfQ._YwYVkoCXnRqDmjQajRW4BSsTTvTSz__zdQWj-SgDyF4DDe7sPBGumXvQJX8M07n
 
 ### 5. Добавить позицию в корзину
 POST {{baseUrl}}/api/cart/items
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
 Content-Type: application/json
 
 {
-  "serviceId": 3,
+  "serviceId": 1,
   "workerId": 1
 }
 
@@ -52,30 +52,30 @@ Authorization: Bearer {{authToken}}
 
 ### 8. Создать заказ из текущей корзины
 POST {{baseUrl}}/api/orders
-Authorization: Bearer {{authToken}}
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
 
 ### 9. Получить заказ по ID
-GET {{baseUrl}}/api/orders/1
-Authorization: Bearer {{authToken}}
+GET {{baseUrl}}/api/orders/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
 
 ### 10. Обновить статус заказа (для администратора)
 PATCH {{baseUrl}}/api/orders/1/status?status=CONFIRMED
-Authorization: Bearer {{authToken}}
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzc2NzYwLCJleHAiOjE3ODE3Nzc2NjAsInJvbGUiOlsiVVNFUiJdfQ.kZWWej86ZyYxtG4kFHEOzed5SeZvc-Dsnynpn97m4tEv2tCiGf82BJ7B2f_G3Too
 
 ### 11. Создать новую услугу (требует прав администратора)
 POST {{baseUrl}}/api/services
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzc2NjI1LCJleHAiOjE3ODE3Nzc1MjUsInJvbGUiOlsiVVNFUiJdfQ.he4BZnZVx5TfnrKdiox8Q7BE35I_YTJyibmN0TKP7J6qHwkkI3_YBcFxaCv70uE5
 Content-Type: application/json
 
 {
-  "name": "йцу",
-  "price": 1500,
+  "name": "ara",
+  "price": 2000,
   "workerId": [1]
 }
 
 ### 12. Создать нового работника (требует прав администратора)
 POST {{baseUrl}}/api/workers
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzc2NjI1LCJleHAiOjE3ODE3Nzc1MjUsInJvbGUiOlsiVVNFUiJdfQ.he4BZnZVx5TfnrKdiox8Q7BE35I_YTJyibmN0TKP7J6qHwkkI3_YBcFxaCv70uE5
 Content-Type: application/json
 
 {
@@ -89,3 +89,35 @@ Content-Type: application/json
 PATCH {{baseUrl}}/api/workers/4/experience?newExperience=8
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzgxNzQwNTQxLCJleHAiOjE3ODE3NDE0NDEsInJvbGUiOlsiVVNFUiJdfQ.GPcaKTkMuaKIcHaKqazCXuhkyHcyXaqevGC1jW13rQmnoZJPtmgJ7mE0yjgFx_8I
 
+### Получить своб Корзину
+GET {{baseUrl}}/api/orders/getMyOrder
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
+
+### Добавить аватар работнику
+POST {{baseUrl}}/api/workers/addImages/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="img_2.png"
+Content-Type: image/png
+
+< ./img_2.png
+--WebAppBoundary--
+
+### Добавить изображения для услуги (несколько файлов)
+POST {{baseUrl}}/api/services/addImage/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzgwMjM4LCJleHAiOjE3ODE3ODExMzgsInJvbGUiOlsiVVNFUiJdfQ.PbDGHy1E2sr78G8LIf8FXxgDTzOpYcDs8BqDuh0Ox7kxNtjwMcyK08PgSSKTYyJb
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="files"; filename="img.png"
+Content-Type: image/png
+
+< ./img.png
+--WebAppBoundary
+Content-Disposition: form-data; name="files"; filename="img_1.png"
+Content-Type: image/png
+
+< ./img_1.png
+--WebAppBoundary--

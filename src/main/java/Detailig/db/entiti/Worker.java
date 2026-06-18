@@ -1,5 +1,6 @@
 package Detailig.db.entiti;
 
+import Detailig.db.image.Image;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,7 @@ public class Worker {
 
     @ManyToMany(mappedBy = "workers")
     private Set<Service> services = new HashSet<>();
+
+    @OneToOne(mappedBy = "worker"  , orphanRemoval = true)
+    private Image image;
 }

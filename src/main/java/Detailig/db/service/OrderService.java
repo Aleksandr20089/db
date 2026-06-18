@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class OrderService {
         // 2. Создаём заказ без комментария и прочего
         Order order = new Order();
         order.setUser(user);
-        order.setStatus(String.valueOf(OrderStatus.PENDING));
+        order.setStatus(OrderStatus.PENDING);
 
         // 3. Преобразуем позиции корзины в OrderItem (код остаётся без изменений)
         Set<OrderItem> orderItems = new HashSet<>();
@@ -47,10 +48,15 @@ public class OrderService {
             OrderItem orderItem = orderMapper.toOrder(cartItem);
             orderItem.setOrder(order);
             orderItems.add(orderItem);
+            orderItem.setStatus(OrderStatus.PENDING);
         }
         order.setItems(orderItems);
 
 
+        BigDecimal total = orderItems.stream()
+                .map(OrderItem::getPriceAtOrder)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        order.setTotalAmount(total);
 
         // 4. Сохраняем заказ
         Order savedOrder = orderRepository.save(order);
@@ -69,11 +75,20 @@ public class OrderService {
         return orderMapper.toResponse(order);
     }
 
+    public OrderResponse getOrderByUser(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Пользователь с таким id: " + userId + " не найден"));
+        Order order = orderRepository.findByUser(user)
+                .orElseThrow(() -> new RuntimeException("Заказ не найден"));
+
+        return orderMapper.toResponse(order);
+    }
+
     // Обновление статуса – возвращает OrderResponse
     public OrderResponse updateOrderStatus(Long orderId, OrderStatus newStatus) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found"));
-        order.setStatus(String.valueOf(newStatus));
+        order.setStatus(newStatus);
         Order updated = orderRepository.save(order);
         return orderMapper.toResponse(updated);
     }
