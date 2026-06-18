@@ -22,7 +22,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("/registration")
+    @PostMapping("/confirm-registration")
     public ResponseEntity<?> registerUser(@RequestParam String code) {
         try {
             userService.confirmRegistration(code);

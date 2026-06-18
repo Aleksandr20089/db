@@ -4,7 +4,7 @@ import Detailig.db.dto.EmailDto;
 import Detailig.db.entiti.User;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "sprig")
+@Mapper(componentModel = "spring")
 public interface EmailMapper {
     EmailDto toDto(User user);
 }

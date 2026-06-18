@@ -34,8 +34,9 @@ public class SingService {
                 users.getId(),
                 users.getRoles());
 
-        if (users.isEnabled() == true && jwtService.validateToken(users.getRefreshToken())) {
-            return jwtService.refreshBaseTocken(tokenData , users.getRefreshToken());
+        String refreshToken = users.getRefreshToken();
+        if (users.isEnabled() && refreshToken != null && !refreshToken.isBlank() && jwtService.validateToken(refreshToken)) {
+            return jwtService.refreshBaseTocken(tokenData, refreshToken);
         }
 
         if (users.isEnabled()) {

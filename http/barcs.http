@@ -1,0 +1,91 @@
+### Базовый URL
+@baseUrl = http://localhost:9090
+
+### Переменная для хранения токена (устанавливается после входа)
+@authToken = {{login.response.body.token}}
+
+### 1. Аутентификация (вход) – получаем токен
+# @name login
+POST {{baseUrl}}/api/singIn/auth
+Content-Type: application/json
+
+{
+  "email": "4057163@mail.ru",
+  "password": "strongPassword123"
+}
+
+### 2. Регистрация нового пользователя
+POST {{baseUrl}}/api/user/registration
+Content-Type: application/json
+
+{
+  "email": "4057163@mail.ru",
+  "password": "strongPassword123",
+  "name": "Иван"
+}
+
+### 3. Подтверждение регистрации по коду
+POST {{baseUrl}}/api/user/confirm-registration?code=1CB25A
+Content-Type: application/json
+
+### 4. Получить корзину текущего пользователя
+GET {{baseUrl}}/api/cart
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+
+### 5. Добавить позицию в корзину
+POST {{baseUrl}}/api/cart/items
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Content-Type: application/json
+
+{
+  "serviceId": 3,
+  "workerId": 1
+}
+
+### 6. Удалить позицию из корзины по ID
+DELETE {{baseUrl}}/api/cart/items/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+
+### 7. Очистить корзину
+DELETE {{baseUrl}}/api/cart
+Authorization: Bearer {{authToken}}
+
+### 8. Создать заказ из текущей корзины
+POST {{baseUrl}}/api/orders
+Authorization: Bearer {{authToken}}
+
+### 9. Получить заказ по ID
+GET {{baseUrl}}/api/orders/1
+Authorization: Bearer {{authToken}}
+
+### 10. Обновить статус заказа (для администратора)
+PATCH {{baseUrl}}/api/orders/1/status?status=CONFIRMED
+Authorization: Bearer {{authToken}}
+
+### 11. Создать новую услугу (требует прав администратора)
+POST {{baseUrl}}/api/services
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Content-Type: application/json
+
+{
+  "name": "йцу",
+  "price": 1500,
+  "workerId": [1]
+}
+
+### 12. Создать нового работника (требует прав администратора)
+POST {{baseUrl}}/api/workers
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgxNzQxNTc2LCJleHAiOjE3ODE3NDI0NzYsInJvbGUiOlsiVVNFUiJdfQ.R-KnEJEpnef7SvXZF46AeiQu6zy9sKD1lHeeIMGNQyzUBCrwDKsXHViW3jB1Za4e
+Content-Type: application/json
+
+{
+  "name": "Паша",
+  "lastName": "Севрцюк",
+  "surName": "Арович",
+  "experience": 1
+}
+
+### 13. Обновить опыт работника
+PATCH {{baseUrl}}/api/workers/4/experience?newExperience=8
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzgxNzQwNTQxLCJleHAiOjE3ODE3NDE0NDEsInJvbGUiOlsiVVNFUiJdfQ.GPcaKTkMuaKIcHaKqazCXuhkyHcyXaqevGC1jW13rQmnoZJPtmgJ7mE0yjgFx_8I
+

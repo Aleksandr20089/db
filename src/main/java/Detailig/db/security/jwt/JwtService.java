@@ -32,17 +32,17 @@ public class JwtService {
 
     public JwtAuthenticationDto generateAuthToken(TockenData tockenData) {
         JwtAuthenticationDto jwtAuthenticationDto = new JwtAuthenticationDto();
-        jwtAuthenticationDto.setToken(bildAcsecTocken(tockenData));
+        jwtAuthenticationDto.setToken(buildAccessToken(tockenData));
         jwtAuthenticationDto.setRefreshToken(bildRefreshTocken(tockenData.id()));
         return jwtAuthenticationDto;
     }
     public JwtAuthenticationDto refreshBaseTocken(TockenData tockenData, String refreshToken) {
         JwtAuthenticationDto jwtAuthenticationDto = new JwtAuthenticationDto();
-        jwtAuthenticationDto.setRefreshToken(bildAcsecTocken(tockenData));
+        jwtAuthenticationDto.setToken(buildAccessToken(tockenData));
         jwtAuthenticationDto.setRefreshToken(refreshToken);
         return jwtAuthenticationDto;
     }
-    private String bildAcsecTocken(TockenData tockenData) {
+    private String buildAccessToken(TockenData tockenData) {
         Instant now = Instant.now();
         return Jwts.builder()
                 .subject(String.valueOf(tockenData.id()))
